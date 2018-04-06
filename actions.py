@@ -22,9 +22,16 @@ def say404(req):
 
 def sayHtml(req,a,b):
     if(a=='htmls' or a=='js' or a=='pic' or a=='css'):
-        dir='./'+a+'/'+b
+        dir=a+'/'+b
         try:
-            open(dir,'rb')
+            f=open(dir,'rb')
+            print(dir)
+            f.close()
+            if a=='pic':
+                f=open(dir,'rb')
+                r=f.read()
+                f.close()
+                return HttpResponse(r)
             zone8='Asia/Shanghai'
             zo8=pytz.timezone(zone8)
             tiz8=datetime.fromtimestamp(time.time(),zo8)
