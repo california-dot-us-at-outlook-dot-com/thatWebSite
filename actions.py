@@ -136,7 +136,10 @@ def getSignin(req):
 
 
 def getFiles(req):
-
+    zone8='Asia/Shanghai'
+    zo8=pytz.timezone(zone8)
+    tiz8=datetime.fromtimestamp(time.time(),zo8)
+    timeList={'year':tiz8.year,'mon':tiz8.month,'day':tiz8.day,'hour':tiz8.hour,'min':tiz8.minute,'zone':zone8}
     try:
         usrname=req.COOKIES['usrname']
     except:
@@ -161,7 +164,10 @@ def getFiles(req):
         htm=r.split('>|<')
         for i in range(len(fn)):
             htm[0]+=('<div><a href="'+fn[i]+'">'+ff[i]+'</a></div>')
-        return HttpResponse(htm[0]+htm[1])
+        f=open('htmls/temp','w')
+        f.write(htm[0]+htm[1])
+        f.close()
+        return render(req,'temp',timeList)
 
     except:
         return render(req,'sayYesNo.html',{'SoF':'Something Wrong!','jump':'/htmls/sayHello.html'})
