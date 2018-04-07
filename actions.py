@@ -86,6 +86,9 @@ def getSignup(req):
                 if(sel[0]==usrname):
                     con.close()
                     return HttpResponse('该用户已存在！')
+                else:
+                    con.close()
+                    return HttpResponse('Something Wrong!')
             except:
                 print('5')
                 con.execute('insert into usr1 values ("{usrname}","{passwd}")'.format(usrname=usrname,passwd=passwd))
@@ -111,10 +114,13 @@ def getSignin(req):
         con=sqlite3.connect('t1.db')
         var=con.execute('select passwd from usr1 where usrname="{usrname}"'.format(usrname=usrname))
         sel=var.fetchone()
-        if(sel[0]==passwd):
-            con.close()
-            return HttpResponse('登入成功！')
-        else:
-            return HttpResponse('密码错误！')
+        try:
+            if(sel[0]==passwd):
+                con.close()
+                return HttpResponse('登入成功！')
+            else:
+                return HttpResponse('密码错误！')
+        except:
+            return HttpResponse('用户不存在！')
     except:
         return HttpResponse('Something Wrong!')
