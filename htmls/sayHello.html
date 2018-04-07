@@ -3,14 +3,17 @@
     <head>
     <script src='/js/jQ3m.js'></script>
     </head>
-    <style>html{background-color:black}#time{display:none}#reqT:hover #time{display:block; position: absolute;}</style>
+    <style>#title:hover{color:brown}html{background-color:black}#time{display:none}#reqT:hover #time{display:block; position: absolute;}</style>
     <body>
-        <center><div><span><a href='/htmls/saySignin.html'> 登入 </a></span> | <span> <a href="/htmls/sayUpload.html">上传文件</a></span> | <span><a href="/htmls/saySignup.html"> 注册 </a></span></div></center>
+        <h1 id='title' align='center'>thatis 文件管理小站</h1>
+        <hr/><hr/>
+        <br/><br/><br/><br/><br/><br/>
+        <center><div><span><a href='/htmls/saySignin.html'> <button>登入</button> </a></span> | <span> <a href="/htmls/sayUpload.html"><button>上传文件</button></a></span> | <span><a href="/htmls/saySignup.html"> <button>注册</button> </a></span></div></center>
     </body>
-    <image src='/pic/jt.jpg'></image>
+    <!-- <image src='/pic/jt.jpg'></image> -->
 
 
-
+    <br/><br/><br/><br/><br/><br/>
     <div id='reqTime' class='req'>
     <span id='reqT'><span>请求时间： </span><span id='time'>{{year}} 年 {{mon}} 月 {{day}} 日 {{hour}} 时 {{min}} 分 | 时区：{{zone}}</span></span>
     </div>
