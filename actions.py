@@ -6,6 +6,8 @@ import time
 from datetime import datetime
 import pytz
 import random
+import sqlite3
+
 def sayHello(req):
     zone8='Asia/Shanghai'
     zo8=pytz.timezone(zone8)
@@ -63,3 +65,27 @@ def getUpload(req):
             return render(req,'sayYesNo.html',{'SoF':'上传成功！','jump':'sayUpload.html'})
     except:
         return render(req,"sayYesNo.html",{'SoF':'上传出错！','jump':'sayUpload.html'})
+
+
+def getSignup(req):
+    try:
+        usrname=req.POST['usrname']
+        passwd=req.POST['passwd']
+        con=sqlite3.connect('t1.db')
+        try:
+            con.execute('create table usr1 (usrname,passwd)')
+        finally:
+            var=con.execute('select usrname from usr1 where usrname="{usrname}"'.format(usrname=usrname))
+            sel=var.fetchone()
+            if(sel[0]==usrname):
+                con.close()
+                return HttpResponse('该用户已存在！')
+            else:
+                con.execute('insert into usr1 values ("{usrname}","{passwd}")'.format(usrname=usrname,passwd=passwd))
+                con.commit()
+                con.close()
+                return HttpResponse('注册成功！')
+
+    except:
+        return HttpResponse('Something Wrong!')
+        

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<meta charset=utf-8>
+<html>
+    <head>
+        <script src='/js/jQ3m.js'></script>
+    </head>
+    <style>body{background-color:black;color:white}table{height:200px}#reqT{padding-top: 200px}#submit{float:right}</style>
+    <body>
+        <center><div><h1>注册新账户</h1></div></center>
+        <hr/><hr/>
+        <br/><br/>
+        <table align='center'>
+            <form action='/signup' method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+            <tr>
+                <td>
+                    用户名：
+                </td>
+                <td>
+                    <input type='text' name='usrname' id='usrname' class='usrname'/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    密 码 ：
+                </td>
+                <td>
+                    <input type='password' name='passwd' id='passwd' class='passwd'/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    重复密码：
+                </td>
+                <td>
+                    <input type='password' name='cpasswd' id='cpasswd'class='cpasswd'/>
+                </td>
+            </tr>
+            <tr>
+            </tr>
+            </form>
+            <tr>
+                <td>
+                
+                </td>
+                <td>
+                    <button id='submit'>确认注册</button>
+                </td>
+            </tr>
+        </table>
+
+
+
+        <div id='reqT' align='center'><span>请求时间： </span><span id='time'>{{year}} 年 {{mon}} 月 {{day}} 日 {{hour}} 时 {{min}} 分 | 时区：{{zone}}</span></div>
+
+        <script>
+            function all(){
+                if((document.getElementsByClassName('passwd')[0].value)==(document.getElementsByClassName('cpasswd')[0].value)){
+                    $('form').submit();                
+                }
+                else{
+                    alert("两次输入的密码不一致!");
+                }
+            }
+            $('#submit').click(all)
+        </script>
+    </body>
+</html>

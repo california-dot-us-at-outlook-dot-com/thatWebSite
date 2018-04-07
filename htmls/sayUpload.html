@@ -10,12 +10,13 @@
         </div>
         <div><br/><br/><br/><br/><br/></div>
         <center>
-        <form action='upload' method="POST" enctype="multipart/form-data">
+        <form action='/upload' method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <input type='file' name='uploadFile'/>
             <input type='submit' value='提交'/>
         </form>
         </center>
+        <div><h2><a href='/'>回到主页</a></h2></div>
         <script>$('body').css({'background-color':'black'});$('#title').css({'color':'white'});$('form').css({'color':'white'})</script>
     </body>
 </html>
