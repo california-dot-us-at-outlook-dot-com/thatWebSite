@@ -72,16 +72,24 @@ def getSignup(req):
         usrname=req.POST['usrname']
         passwd=req.POST['passwd']
         con=sqlite3.connect('t1.db')
+        print('1')
         try:
             con.execute('create table usr1 (usrname,passwd)')
+            print('2')
+
         finally:
+            print('3')
             var=con.execute('select usrname from usr1 where usrname="{usrname}"'.format(usrname=usrname))
             sel=var.fetchone()
-            if(sel[0]==usrname):
-                con.close()
-                return HttpResponse('该用户已存在！')
-            else:
+            print('4')
+            try:
+                if(sel[0]==usrname):
+                    con.close()
+                    return HttpResponse('该用户已存在！')
+            except:
+                print('5')
                 con.execute('insert into usr1 values ("{usrname}","{passwd}")'.format(usrname=usrname,passwd=passwd))
+                print('6')
                 con.commit()
                 con.close()
                 return HttpResponse('注册成功！')
@@ -89,3 +97,24 @@ def getSignup(req):
     except:
         return HttpResponse('Something Wrong!')
         
+def getSignin(req):
+    try:
+        cpasswd=req.POST['cpasswd']
+        zone8='Asia/Shanghai'
+        zo8=pytz.timezone(zone8)
+        tiz8=datetime.fromtimestamp(time.time(),zo8)
+        wekd=tiz8.weekday()
+        if(cpasswd!=str(wekd)):
+            return HttpResponse('验证出错！')
+        usrname=req.POST['usrname']
+        passwd=req.POST['passwd']
+        con=sqlite3.connect('t1.db')
+        var=con.execute('select passwd from usr1 where usrname="{usrname}"'.format(usrname=usrname))
+        sel=var.fetchone()
+        if(sel[0]==passwd):
+            con.close()
+            return HttpResponse('登入成功！')
+        else:
+            return HttpResponse('密码错误！')
+    except:
+        return HttpResponse('Something Wrong!')

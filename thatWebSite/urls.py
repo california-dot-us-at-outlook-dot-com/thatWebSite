@@ -24,9 +24,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url('^$',actions.sayHello),
     url('^signup$',actions.getSignup),
+    url('^signin$',actions.getSignin),
     url('upload',actions.getUpload),
 
-    url('^([a-z1-9]+)/([a-z1-9A-Z]+.[a-z1-9A-Z]+)',actions.sayHtml), #仅支持 xxx.com:80/xxx/xxx.xxx 格式(即一重文件夹+文件名.xxx)
+    url(r'^([a-z1-9]+)/([a-z1-9A-Z]+\.[a-z1-9A-Z]+)',actions.sayHtml), #仅支持 xxx.com:80/xxx/xxx.xxx 格式(即一重文件夹+文件名.xxx)
 
 
 

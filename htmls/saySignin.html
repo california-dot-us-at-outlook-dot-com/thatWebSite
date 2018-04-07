@@ -4,13 +4,13 @@
     <head>
         <script src='/js/jQ3m.js'></script>
     </head>
-    <style>body{background-color:black;color:white}table{height:200px}#reqT{padding-top: 200px}#submit{float:right}</style>
+    <style>body{background-color:black;color:white}table{height:200px}#reqT{padding-top: 200px}#submit{float:right}select{float:none;text-align:'center'}</style>
     <body>
-        <center><div><h1>注册新账户</h1></div></center>
+        <center><div><h1>登入您的账户</h1></div></center>
         <hr/><hr/>
         <br/><br/>
         <table align='center'>
-            <form action='/signup' method="POST" enctype="multipart/form-data">
+            <form action='/signin' method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
             <tr>
                 <td>
@@ -30,11 +30,26 @@
             </tr>
             <tr>
                 <td>
-                    重复密码：
+                    验证信息：
                 </td>
                 <td>
-                    <input type='password' name='cpasswd' id='cpasswd'class='cpasswd'/>
+                    <select name='cpasswd'>
+                        <option value='0'>星期日</option>
+                        <option value='10'>星期九</option>
+                        <option value='1'>星期一</option>
+                        <option value='2'>星期二</option>
+                        <option value='9'>星期几</option>
+                        <option value='3'>星期三</option>
+                        <option value='4'>星期四</option>
+                        <option value='-1'>星期零</option>
+                        <option value='5'>星期五</option>
+                        <option value='6'>星期六</option>
+                        <option value='7'>星期八</option>
+
+                    </select>
+                    昨天是星期几？
                 </td>
+
             </tr>
             <tr>
             </tr>
@@ -44,7 +59,7 @@
                 
                 </td>
                 <td>
-                    <button id='submit'>确认注册</button>
+                    <button id='submit'>确认登入</button>
                 </td>
             </tr>
         </table>
@@ -55,12 +70,7 @@
 
         <script>
             function all(){
-                if((document.getElementsByClassName('passwd')[0].value)==(document.getElementsByClassName('cpasswd')[0].value)){
-                    $('form').submit();                
-                }
-                else{
-                    alert("两次输入的密码不一致!")
-                }
+                $('form').submit()
             }
             $('#submit').click(all)
         </script>
